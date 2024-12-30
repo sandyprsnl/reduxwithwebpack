@@ -1,0 +1,23 @@
+{
+  "name": "reduxwithwebpeck",
+  "version": "1.0.0",
+  "description": "redux with firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack"
+  },
+  "keywords": [
+    "redux",
+    "webpack"
+  ],
+  "author": "Sandeep Bhardwaj",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
