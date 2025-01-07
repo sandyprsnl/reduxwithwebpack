@@ -9,46 +9,46 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/redux_with_redux_toolkit/actions.js":
-/*!*************************************************!*\
-  !*** ./src/redux_with_redux_toolkit/actions.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addTask: () => (/* binding */ addTask),\n/* harmony export */   removeTask: () => (/* binding */ removeTask),\n/* harmony export */   updateTask: () => (/* binding */ updateTask)\n/* harmony export */ });\n/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs\");\n\r\n\r\n\r\n\r\nconst addTask = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAction)(\"ADD_TASK\") ;\r\nconst updateTask = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAction)(\"UPDATE_TASK\") ;\r\nconst removeTask = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAction)(\"REMOVE_TASK\") ;\r\n\r\n\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/redux_with_redux_toolkit/actions.js?");
-
-/***/ }),
-
-/***/ "./src/redux_with_redux_toolkit/index.js":
-/*!***********************************************!*\
-  !*** ./src/redux_with_redux_toolkit/index.js ***!
-  \***********************************************/
+/***/ "./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/index.js":
+/*!***************************************************************************!*\
+  !*** ./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/index.js ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const { addTask, updateTask, removeTask, } = __webpack_require__(/*! ./actions */ \"./src/redux_with_redux_toolkit/actions.js\");\r\nconst { store } = __webpack_require__(/*! ./store */ \"./src/redux_with_redux_toolkit/store.js\");\r\n\r\nstore.dispatch(addTask({task:\"task 1 with redux toolkit\"}));\r\n\r\nconsole.log(store.getState());\r\n\r\nstore.dispatch(addTask({task:\"task 2 with redux toolkit\"}));\r\n\r\nconsole.log(store.getState());\r\n\r\nstore.dispatch(removeTask({id:1}));\r\n\r\nconsole.log(store.getState());\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/redux_with_redux_toolkit/index.js?");
+eval("const { ADD_TASK } = __webpack_require__(/*! ./reducers */ \"./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/reducers.js\");\r\nconst { store } = __webpack_require__(/*! ./store */ \"./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/store.js\");\r\n\r\nstore.dispatch(ADD_TASK({task:\"task 1 added in with slice and middleware\"}));\r\n\r\nconsole.log(store.getState())\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/index.js?");
 
 /***/ }),
 
-/***/ "./src/redux_with_redux_toolkit/reducers.js":
-/*!**************************************************!*\
-  !*** ./src/redux_with_redux_toolkit/reducers.js ***!
-  \**************************************************/
+/***/ "./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/middleware/logger.js":
+/*!***************************************************************************************!*\
+  !*** ./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/middleware/logger.js ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Reducers: () => (/* binding */ Reducers)\n/* harmony export */ });\n/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs\");\n\r\n\r\nvar id = 0;\r\n\r\n\r\nconst Reducers = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createReducer)([],(reducerBuilder)=>{\r\n    reducerBuilder.addCase('ADD_TASK',(state,action)=>{\r\n        state.push(                {\r\n            id: ++id,\r\n            task: action.payload.task,\r\n            isComplete: false\r\n        });\r\n    }).addCase('UPDATE_TASK',(state,action)=>{\r\n        const index = state.findIndex((task)=>task.id==action.payload.id);\r\n        state[index].task = action.payload.task\r\n    }).addCase('REMOVE_TASK',(state,action)=>{\r\n        const index = state.findIndex((task)=>task.id==action.payload.id);\r\n        state.splice(index,1);\r\n    })\r\n})\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/redux_with_redux_toolkit/reducers.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   loggerMiddleware: () => (/* binding */ loggerMiddleware)\n/* harmony export */ });\nconst loggerMiddleware = state=>next=>action=>{\r\n    console.log('current type is ', action.type);\r\n\r\n    next(action); /// must in middleware to call new process or middleare\r\n}\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/middleware/logger.js?");
 
 /***/ }),
 
-/***/ "./src/redux_with_redux_toolkit/store.js":
-/*!***********************************************!*\
-  !*** ./src/redux_with_redux_toolkit/store.js ***!
-  \***********************************************/
+/***/ "./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/reducers.js":
+/*!******************************************************************************!*\
+  !*** ./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/reducers.js ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   store: () => (/* binding */ store)\n/* harmony export */ });\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ \"./node_modules/redux/dist/redux.mjs\");\n/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers */ \"./src/redux_with_redux_toolkit/reducers.js\");\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/dist/redux-thunk.mjs\");\n\r\n\r\n\r\n\r\nconst store = (0,redux__WEBPACK_IMPORTED_MODULE_1__.legacy_createStore)(_reducers__WEBPACK_IMPORTED_MODULE_0__.Reducers,(0,redux__WEBPACK_IMPORTED_MODULE_1__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_2__.thunk));\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/redux_with_redux_toolkit/store.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ADD_TASK: () => (/* binding */ ADD_TASK),\n/* harmony export */   REMOVE_TASK: () => (/* binding */ REMOVE_TASK),\n/* harmony export */   UPDATE_TASK: () => (/* binding */ UPDATE_TASK),\n/* harmony export */   taskReducer: () => (/* binding */ taskReducer)\n/* harmony export */ });\n/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs\");\n\r\n\r\nvar id = 0;\r\n\r\n\r\nconst taskSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({\r\n    name:'task',\r\n    initialState:[],\r\n    reducers:{\r\n        ADD_TASK:(state,action)=>{\r\n            state.push(                {\r\n                id: ++id,\r\n                task: action.payload.task,\r\n                isComplete: false\r\n            });\r\n        },\r\n        UPDATE_TASK:(state,action)=>{\r\n            const index = state.findIndex((task)=>task.id==action.payload.id);\r\n            state[index].task = action.payload.task\r\n        },\r\n        REMOVE_TASK:(state,action)=>{\r\n            const index = state.findIndex((task)=>task.id==action.payload.id);\r\n            state.splice(index,1);\r\n        }\r\n    }\r\n});\r\n\r\nconst {ADD_TASK,UPDATE_TASK,REMOVE_TASK}= taskSlice.actions;\r\nconst  taskReducer = taskSlice.reducer;\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/reducers.js?");
+
+/***/ }),
+
+/***/ "./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/store.js":
+/*!***************************************************************************!*\
+  !*** ./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/store.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   store: () => (/* binding */ store)\n/* harmony export */ });\n/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs\");\n/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers */ \"./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/reducers.js\");\n/* harmony import */ var _middleware_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./middleware/logger */ \"./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/middleware/logger.js\");\n\r\n\r\n\r\n\r\nconst store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({\r\n    reducer:{\r\n        task:_reducers__WEBPACK_IMPORTED_MODULE_0__.taskReducer\r\n    },\r\n    middleware:(getDefaultMiddleware)=>[...getDefaultMiddleware(),_middleware_logger__WEBPACK_IMPORTED_MODULE_1__.loggerMiddleware]\r\n})\n\n//# sourceURL=webpack://reduxwithwebpeck/./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/store.js?");
 
 /***/ }),
 
@@ -167,7 +167,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/redux_with_redux_toolkit/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/5_redux_with_redux_toolkit_with_Slice_and_middleware/index.js");
 /******/ 	
 /******/ })()
 ;
